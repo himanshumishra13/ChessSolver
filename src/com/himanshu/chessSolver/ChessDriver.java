@@ -17,7 +17,7 @@ public class ChessDriver {
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
 		double timeElapsed = duration / (1000000);
-		//result.printResult(M, N);
+		//result.printResult(M, N); //To print the solutions
 		System.out.println("The Elapsed time in milliseconds is:- " + timeElapsed);
 		System.out.println("The total no. of unique solutions are "+result.getSetSize());
 		
