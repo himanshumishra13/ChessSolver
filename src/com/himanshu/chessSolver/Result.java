@@ -41,13 +41,18 @@ public class Result {
 			String temp[]=sol.split(";");
 			for (int k = 0; k < temp.length; k++) {
 				String g = temp[k];
+				//System.out.println(g);
 				int row = g.charAt(1) - 48;
 				int col = g.charAt(2) - 48;
-				board[row][col] = g.charAt(0) - 48;
+				//System.out.println(g.charAt(1)+" "+g.charAt(2));
+				board[row][col] = (int)g.charAt(0);
 			}
 			for (int i = 0; i < M; i++) {
 				for (int j = 0; j < N; j++) {
-					System.out.print(getAlphabet(board[i][j]) + " ");
+					if(board[i][j]!=0)
+						System.out.print((char)board[i][j]);
+					else
+						System.out.print(board[i][j]);
 				}
 				System.out.println();
 			}
