@@ -1,4 +1,4 @@
-package com.himanshu.chessSolver;
+package com.himanshu.chessElements;
 
 import java.util.HashSet;
 /**
@@ -41,10 +41,8 @@ public class Result {
 			String temp[]=sol.split(";");
 			for (int k = 0; k < temp.length; k++) {
 				String g = temp[k];
-				//System.out.println(g);
 				int row = g.charAt(1) - 48;
 				int col = g.charAt(2) - 48;
-				//System.out.println(g.charAt(1)+" "+g.charAt(2));
 				board[row][col] = (int)g.charAt(0);
 			}
 			for (int i = 0; i < M; i++) {
@@ -62,34 +60,21 @@ public class Result {
 	}
 	
 	/**
-	 * Helper function which gives the character representation of the pieces
-	 * @param n The numerical representation of the piece
-	 * @return The Character representation of the piece
-	 */
-	private char getAlphabet(int n) {
-		switch (n) {
-		case 1:
-			return 'K';
-		case 2:
-			return 'R';
-		case 3:
-			return 'N';
-		case 4:
-			return 'B';
-		case 5:
-			return 'Q';
-		default:
-			return '0';
-		}
-	}
-	
-	/**
 	 * This function gives the number of unique solutions
 	 * @return The size of the result set, i.e the number of unique solutions
 	 */
 	public int getSetSize()
 	{
 		return this.result.size();
+	}
+	
+	/**
+	 * This function returns the result set containing unique board layouts for the given problem
+	 * @return The set of solutions
+	 */
+	public HashSet<String> getSet()
+	{
+		return this.result;
 	}
 
 }

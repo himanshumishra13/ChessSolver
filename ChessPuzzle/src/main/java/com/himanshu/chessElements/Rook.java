@@ -1,4 +1,4 @@
-package com.himanshu.chessSolver;
+package com.himanshu.chessElements;
 
 public class Rook implements ChessPiece {
 	int row,col;
@@ -14,12 +14,12 @@ public class Rook implements ChessPiece {
 		return this.row;
 	}
 
-	@Override
+	
 	public int getCol() {
 		return this.col;
 	}
 
-	@Override
+	
 	public boolean isThePlaceSafe(int row, int col) {
 		if (this.getRow() == row || this.getCol() == col)
 			return true;

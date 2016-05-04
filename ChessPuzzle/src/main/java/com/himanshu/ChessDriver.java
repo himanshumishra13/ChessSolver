@@ -1,6 +1,15 @@
-package com.himanshu.chessSolver;
+package com.himanshu;
 
 import java.util.Arrays;
+
+import com.himanshu.chessElements.Bishop;
+import com.himanshu.chessElements.ChessBoard;
+import com.himanshu.chessElements.ChessPiece;
+import com.himanshu.chessElements.King;
+import com.himanshu.chessElements.Knight;
+import com.himanshu.chessElements.Queen;
+import com.himanshu.chessElements.Result;
+import com.himanshu.chessElements.Rook;
 
 /**
  * This class is the driver class for the ChessBoard solver.
@@ -15,7 +24,6 @@ public class ChessDriver {
 		Result result;
 		ChessPiece[] piece={new Queen(),new Queen(),new Bishop(),new Bishop(),new King(),new King(),new Knight()};
 		ChessBoard chess=new ChessBoard(M,N,Arrays.asList(piece));
-		
 		long startTime = System.nanoTime();
 		result=chess.getSolutions();
 		long endTime = System.nanoTime();

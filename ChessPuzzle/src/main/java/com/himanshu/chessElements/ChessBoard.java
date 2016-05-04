@@ -1,4 +1,4 @@
-package com.himanshu.chessSolver;
+package com.himanshu.chessElements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,12 @@ public class ChessBoard {
 	private int board[][];
 	List<ChessPiece> pieces; 
 
+	/**
+	 * Initializes the ChessBoard fields
+	 * @param M Row count
+	 * @param N Column Count
+	 * @param piecesToPlace List of pieces to place on the board
+	 */
 	public ChessBoard(int M,int N,List<ChessPiece> piecesToPlace)
 	{
 		this.M=M;
@@ -17,6 +23,9 @@ public class ChessBoard {
 		initializeBoard();
 	}
 	
+	/**
+	 * This initializes the board to empty, which is represented as 0
+	 */
 	private void initializeBoard()
 	{
 		for(int i=0;i<this.getM();i++)
@@ -25,6 +34,7 @@ public class ChessBoard {
 				board[i][j]=0;
 		}
 	}
+	
 	
 	public int getN() {
 		return N;
@@ -42,6 +52,10 @@ public class ChessBoard {
 		this.M = M;
 	}
 	
+	/**
+	 * This function acts as the driver for solve function.
+	 * @return Result object containing the unique solutions
+	 */
 	public Result getSolutions()
 	{
 		Result results=new Result(this.getM(),this.getN());
@@ -51,6 +65,18 @@ public class ChessBoard {
 		return results;
 	}
 	
+	/**
+	 * This function recursively checks whether the current piece can be placed on the board safely or not. The function backtracks to a previous valid state 
+	 * if the the current piece cannot be placed properly
+	 * @param results Result object containing the solutions
+	 * @param M Row count of the board
+	 * @param N Column count of the board
+	 * @param board A two dimensional array which represents a chess board
+	 * @param pieces A list of ChessPieces types which is to be placed on the board
+	 * @param placedPieces A string containing the pieces and their positions already placed on the board
+	 * @param offset A counter which points to the current piece in the pieces list
+	 * @return True/False, depending whether the piece can be placed or not.
+	 */
 	public boolean solve(Result results,int M,int N,int board[][],List<ChessPiece> pieces,String placedPieces,int offset)
 	{
 		if(offset==pieces.size())
@@ -85,7 +111,6 @@ public class ChessBoard {
 			if(isSafe)
 			{
 				board[i][j]=(int)piece.returnSymbol();
-				//pieces.remove(0);
 				solve(results,M,N,board,pieces,placedPieces
 									+ new StringBuilder().append(piece.returnSymbol())
 											.append(Integer.toString(i))
@@ -99,6 +124,15 @@ public class ChessBoard {
 		return false;
 	}
 	
+	/**
+	 * A helper function which checks whether the current piece, that is being placed, is threatened by the previously placed pieces or not and
+	 *  whether placing this piece on the current position threatens an already placed piece or not.
+	 * @param row Current row value
+	 * @param col Current column value
+	 * @param piece The Current piece to be placed
+	 * @param placedPieces Previously placed pieces and their positions
+	 * @return True/False, depending that the current piece can be placed safely or not for the current position
+	 */
 	private boolean canPlaceThePiece(int row,int col,ChessPiece piece,String placedPieces)
 	{
 		if(placedPieces.length()==0)

@@ -1,4 +1,4 @@
-package com.himanshu.chessSolver;
+package com.himanshu.chessElements;
 
 public class King implements ChessPiece {
 	
