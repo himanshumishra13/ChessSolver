@@ -11,5 +11,6 @@ When returning your solution, please provide with your answer the total number o
 
 
 To Run:
+
 1. Compile the source files by mvn compile (or mvn package for Test cases run)
 2. Use mvn exec:java to run the solution for 7x7 board with 2 Kings, 2 Queens, 2 Bishops and 1 Knight.
