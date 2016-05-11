@@ -1,13 +1,16 @@
 package com.himanshu.chessElements;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeSet;
 
 public class ChessBoard {
 	private int M,N;
 	private int board[][];
-	List<ChessPiece> pieces; 
+	List<ChessPiece> pieces;
+	//ArrayList<Integer> emptyCells;
 	/**
 	 * Initializes the ChessBoard fields
 	 * @param M Row count
@@ -20,6 +23,7 @@ public class ChessBoard {
 		this.N=N;
 		pieces=piecesToPlace;
 		board=new int[M][N];
+		//emptyCells=new ArrayList<Integer>();
 		initializeBoard();
 	}
 	
@@ -33,6 +37,7 @@ public class ChessBoard {
 			for(int j=0;j<this.getN();j++)
 			{
 				board[i][j]=0;
+				//emptyCells.add((i*M)+j);
 			}
 		}
 		
@@ -62,8 +67,8 @@ public class ChessBoard {
 	public Result getSolutions()
 	{
 		Result results=new Result(this.getM(),this.getN());
-		
-		solve(results,this.getM(),this.getN(),this.board,this.pieces,"",0);
+		List<ChessPiece> placedPiece=new ArrayList<ChessPiece>();
+		solve(results,this.getM(),this.getN(),this.board,this.pieces,placedPiece,0);
 		
 		return results;
 	}
@@ -80,7 +85,7 @@ public class ChessBoard {
 	 * @param offset A counter which points to the current piece in the pieces list
 	 * @return True/False, depending whether the piece can be placed or not.
 	 */
-	public boolean solve(Result results,int M,int N,int board[][],List<ChessPiece> pieces,String placedPieces,int offset)
+	public boolean solve(Result results,int M,int N,int board[][],List<ChessPiece> pieces,List<ChessPiece> placedPieces,int offset)
 	{
 		if(offset==pieces.size())
 		{
@@ -97,15 +102,14 @@ public class ChessBoard {
 				}
 			}
 			results.addResult(sb1.toString());
-
 			return true;
 		}
 		
 		ChessPiece piece=pieces.get(offset);
-		for(int k=0;k<M*N;k++)
+		for(int k=0;k<(M*N);k++)
 		{
-				int i=k/M;
-				int j=k%N;
+			int i=k/M;
+			int j=k%N;
 			if(board[i][j]!=0) //Escaping the cells which are either occupied or being threatened by already placed piece
 				continue;
 			piece.setRow(i);
@@ -119,15 +123,13 @@ public class ChessBoard {
 				 * Marking all the cells which will be threatened by this placing piece
 				 */
 				markThreaten(board,i,j,piece.returnSymbol());
-				solve(results,M,N,board,pieces,placedPieces
-									+ new StringBuilder().append(piece.returnSymbol())
-											.append(Integer.toString(i))
-											.append(Integer.toString(j))
-											.append(";").toString(),offset+1);
+				placedPieces.add(piece);
+				solve(results,M,N,board,pieces,placedPieces,offset+1);
 				/*
 				 * The solution backtracks, all the changes done by placing this piece should be reversed
 				 */
 				unmarkThreaten(board,i,j,piece.returnSymbol());
+				placedPieces.remove(placedPieces.size()-1);
 				board[i][j]=0;
 				piece.setRow(-1);
 				piece.setCol(-1);
@@ -146,35 +148,16 @@ public class ChessBoard {
 	 * @param placedPieces Previously placed pieces and their positions
 	 * @return True/False, depending that the current piece can be placed safely or not for the current position
 	 */
-	private boolean canPlaceThePiece(int row,int col,ChessPiece piece,String placedPieces)
+	private boolean canPlaceThePiece(int row,int col,ChessPiece piece,List<ChessPiece> placedPieces)
 	{
-		if(placedPieces.length()==0)
+		if(placedPieces.size()==0)
 			return true;
-		String temp[] = placedPieces.split(";");
-		for (int i = 0; i < temp.length; i++) {
+		for (int i = 0; i < placedPieces.size(); i++) {
 			boolean attackFrom = false, attackTo = false;
-			ChessPiece placedPiece=null;
-			char a = temp[i].charAt(0);
-			switch(a){
-			case 'K': placedPiece=new King();
-			break;
-			case 'R': placedPiece=new Rook();
-			break;
-			case 'N': placedPiece=new Knight();
-			break;
-			case 'B': placedPiece=new Bishop();
-			break;
-			case 'Q': placedPiece=new Queen();
-			break;
-			}
-			int rowVal = temp[i].charAt(1) - 48;
-			int colVal = temp[i].charAt(2) - 48;
-			placedPiece.setRow(rowVal);
-			placedPiece.setCol(colVal);
-			attackFrom=placedPiece.isThePlaceSafe(row, col);
+			attackFrom=placedPieces.get(i).isThePlaceSafe(row, col);
 			if(attackFrom)
 				return false;
-			attackTo=piece.isThePlaceSafe(rowVal, colVal);
+			attackTo=piece.isThePlaceSafe(placedPieces.get(i).getRow(), placedPieces.get(i).getCol());
 			if(attackTo)
 				return false;
 		}
@@ -391,5 +374,20 @@ public class ChessBoard {
 			if(flag1==1 && flag2==1)
 				board[row+1][col-1]+=1;
 		}
+	}
+	
+	private ArrayList<Integer> updateFreeCellsSet(int[][] board)
+	{
+		ArrayList<Integer> temp=new ArrayList<Integer>();
+		for(int i=0;i<M;i++)
+		{
+			for(int j=0;j<N;j++)
+			{
+				if(board[i][j]==0)
+					temp.add((i*M)+j);
+			}
+		}
+		
+		return temp;
 	}
 }

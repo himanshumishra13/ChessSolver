@@ -1,6 +1,10 @@
 package com.himanshu.chessElements;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 /**
  * This class stores the unique board solutions for the given set of pieces
  * @author Himanshu
@@ -8,7 +12,7 @@ import java.util.HashSet;
  */
 
 public class Result {
-	private HashSet<String> result;
+	private Set<String> result;
 	private int M;
 	private int N;
 	public Result(int M,int N)
@@ -22,9 +26,9 @@ public class Result {
 	 * This function adds the result board solution in a string format to the result set
 	 * @param res The String representation of the solution board
 	 */
-	public void addResult(String res)
+	public void addResult(String result)
 	{
-		this.result.add(res);
+		this.result.add(result);
 	}
 	
 	/**
@@ -72,7 +76,7 @@ public class Result {
 	 * This function returns the result set containing unique board layouts for the given problem
 	 * @return The set of solutions
 	 */
-	public HashSet<String> getSet()
+	public Set<String> getSet()
 	{
 		return this.result;
 	}
