@@ -41,6 +41,34 @@ public class Rook implements ChessPiece {
 		return 'R';
 	}
 	
+	public void markThreaten(int[][] board,int M,int N)
+	{
+		for(int y=0;y<M;y++)
+		{
+			if(y!=this.getRow())
+				board[y][this.getCol()]-=1;
+			
+		}
+		for(int z=0;z<N;z++)
+		{
+			if(z!=this.getCol())
+				board[this.getRow()][z]-=1;
+		}
+	}
 	
+	public void unmarkThreaten(int[][] board,int M,int N)
+	{
+		for(int y=0;y<M;y++)
+		{
+			if(y!=this.getRow())
+				board[y][this.getCol()]+=1;
+			
+		}
+		for(int z=0;z<N;z++)
+		{
+			if(z!=this.getCol())
+				board[this.getRow()][z]+=1;
+		}
+	}
 
 }

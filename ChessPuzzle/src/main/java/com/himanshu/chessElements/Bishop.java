@@ -41,5 +41,27 @@ public class Bishop implements ChessPiece{
 		return 'B';
 	}
 	
-
+	public void markThreaten(int[][] board,int M,int N)
+	{
+		for(int y=0;y<M;y++)
+		{
+			for(int z=0;z<N;z++)
+			{
+				if(Math.abs(this.getRow()-y)==Math.abs(this.getCol()-z) && (y!=this.getRow()) && (z!=this.getCol()))
+					board[y][z]-=1;
+			}
+		}
+	}
+	
+	public void unmarkThreaten(int[][] board,int M,int N)
+	{
+		for(int y=0;y<M;y++)
+		{
+			for(int z=0;z<N;z++)
+			{
+				if(Math.abs(this.getRow()-y)==Math.abs(this.getCol()-z) && (y!=this.getRow()) && (z!=this.getCol()))
+					board[y][z]+=1;
+			}
+		}
+	}
 }

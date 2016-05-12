@@ -48,4 +48,70 @@ public class King implements ChessPiece {
 		return 'K';
 	}
 
+	
+	public void markThreaten(int[][] board,int M,int N)
+	{
+		int flag0=0,flag1=0,flag2=0,flag3=0;	
+		if((this.getRow()-1)>=0)
+		{
+			board[this.getRow()-1][this.getCol()]-=1;
+			flag0=1;
+		}
+		if((this.getCol()-1)>=0)
+		{
+			board[this.getRow()][this.getCol()-1]-=1;
+			flag1=1;
+		}
+		if((this.getRow()+1)<N)
+		{
+			board[this.getRow()+1][this.getCol()]-=1;
+			flag2=1;
+		}
+		if((this.getCol()+1)<N)
+		{
+			board[this.getRow()][this.getCol()+1]-=1;
+			flag3=1;
+		}
+		if(flag0==1 && flag1==1)
+			board[this.getRow()-1][this.getCol()-1]-=1;
+		if(flag2==1 && flag3==1)
+			board[this.getRow()+1][this.getCol()+1]-=1;
+		if(flag0==1 && flag3==1)
+			board[this.getRow()-1][this.getCol()+1]-=1;
+		if(flag1==1 && flag2==1)
+			board[this.getRow()+1][this.getCol()-1]-=1;
+	}
+	
+	public void unmarkThreaten(int[][] board,int M,int N)
+	{
+		int flag0=0,flag1=0,flag2=0,flag3=0;	
+		if((this.getRow()-1)>=0)
+		{
+			board[this.getRow()-1][this.getCol()]+=1;
+			flag0=1;
+		}
+		if((this.getCol()-1)>=0)
+		{
+			board[this.getRow()][this.getCol()-1]+=1;
+			flag1=1;
+		}
+		if((this.getRow()+1)<N)
+		{
+			board[this.getRow()+1][this.getCol()]+=1;
+			flag2=1;
+		}
+		if((this.getCol()+1)<N)
+		{
+			board[this.getRow()][this.getCol()+1]+=1;
+			flag3=1;
+		}
+		if(flag0==1 && flag1==1)
+			board[this.getRow()-1][this.getCol()-1]+=1;
+		if(flag2==1 && flag3==1)
+			board[this.getRow()+1][this.getCol()+1]+=1;
+		if(flag0==1 && flag3==1)
+			board[this.getRow()-1][this.getCol()+1]+=1;
+		if(flag1==1 && flag2==1)
+			board[this.getRow()+1][this.getCol()-1]+=1;
+	}
 }

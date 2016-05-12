@@ -44,4 +44,14 @@ public class Knight implements ChessPiece {
 		return 'N';
 	}
 	
+	public void markThreaten(int[][] board,int M,int N)
+	{
+	
+	}
+	
+	public void unmarkThreaten(int[][] board,int M,int N)
+	{
+		
+	}
+	
 }
