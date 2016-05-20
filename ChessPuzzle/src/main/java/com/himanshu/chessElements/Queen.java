@@ -1,22 +1,12 @@
 package com.himanshu.chessElements;
 
-public class Queen implements ChessPiece{
+public class Queen extends AbstractChessPiece{
 	int row,col;
 	
 	public Queen()
 	{
 		this.row=-1;
 		this.col=-1;
-	}
-
-	
-	public int getRow() {
-		return this.row;
-	}
-
-	
-	public int getCol() {
-		return this.col;
 	}
 
 	
@@ -27,17 +17,6 @@ public class Queen implements ChessPiece{
 			return true;
 		return false;
 	}
-
-	
-	public void setRow(int row) {
-		this.row=row;
-	}
-
-	
-	public void setCol(int col) {
-		this.col=col;
-	}
-
 	
 	public char returnSymbol() {
 		return 'Q';

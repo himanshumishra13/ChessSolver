@@ -1,6 +1,6 @@
 package com.himanshu.chessElements;
 
-public class Rook implements ChessPiece {
+public class Rook extends AbstractChessPiece {
 	int row,col;
 	
 	public Rook()
@@ -10,32 +10,11 @@ public class Rook implements ChessPiece {
 	}
 
 	
-	public int getRow() {
-		return this.row;
-	}
-
-	
-	public int getCol() {
-		return this.col;
-	}
-
-	
 	public boolean isThePlaceSafe(int row, int col) {
 		if (this.getRow() == row || this.getCol() == col)
 			return true;
 		return false;
 	}
-
-	
-	public void setRow(int row) {
-		this.row=row;
-	}
-
-	
-	public void setCol(int col) {
-		this.col=col;
-	}
-
 	
 	public char returnSymbol() {
 		return 'R';

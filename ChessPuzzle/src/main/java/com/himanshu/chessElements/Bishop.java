@@ -1,6 +1,6 @@
 package com.himanshu.chessElements;
 
-public class Bishop implements ChessPiece{
+public class Bishop extends AbstractChessPiece{
 	int row,col;
 	
 	public Bishop()
@@ -10,30 +10,10 @@ public class Bishop implements ChessPiece{
 	}
 
 	
-	public int getRow() {
-		return this.row;
-	}
-
-	
-	public int getCol() {
-		return this.col;
-	}
-
-	
 	public boolean isThePlaceSafe(int row, int col) {
 		if (Math.abs(this.getRow() - row) == Math.abs(this.getCol() - col))
 			return true;
 		return false;
-	}
-
-	
-	public void setRow(int row) {
-		this.row=row;
-	}
-
-	
-	public void setCol(int col) {
-		this.col=col;
 	}
 
 	

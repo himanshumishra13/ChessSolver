@@ -1,6 +1,6 @@
 package com.himanshu.chessElements;
 
-public class Knight implements ChessPiece {
+public class Knight extends AbstractChessPiece {
 	int row,col;
 	
 	public Knight()
@@ -10,15 +10,7 @@ public class Knight implements ChessPiece {
 	}
 
 	
-	public int getRow() {
-		return this.row;
-	}
-
 	
-	public int getCol() {
-		return this.col;
-	}
-
 	
 	public boolean isThePlaceSafe(int row, int col) {
 		int rowDiff = Math.abs(this.getRow() - row);
@@ -29,16 +21,6 @@ public class Knight implements ChessPiece {
 	}
 
 	
-	public void setRow(int row) {
-		this.row=row;
-		
-	}
-
-	
-	public void setCol(int col) {
-		this.col=col;
-	}
-
 	
 	public char returnSymbol() {
 		return 'N';
