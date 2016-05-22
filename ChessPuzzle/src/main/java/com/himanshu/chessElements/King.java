@@ -31,67 +31,34 @@ public class King extends AbstractChessPiece {
 	
 	public void markThreaten(int[][] board,int M,int N)
 	{
-		int flag0=0,flag1=0,flag2=0,flag3=0;	
-		if((this.getRow()-1)>=0)
+		for(int i=0;i<M && i<=this.row+1;i++)
 		{
-			board[this.getRow()-1][this.getCol()]-=1;
-			flag0=1;
+			for(int j=0;j<N && j<=this.col+1;j++)
+			{
+				if (Math.abs(this.getRow() - i) == 1 && Math.abs(this.getCol() - j) == 1)
+					board[i][j]-=1;
+				if ((this.getRow() == i && Math.abs(this.getCol() - j) == 1)
+						|| (this.getCol() == j && Math.abs(this.getRow() - i) == 1))
+					board[i][j]-=1;
+			}
 		}
-		if((this.getCol()-1)>=0)
-		{
-			board[this.getRow()][this.getCol()-1]-=1;
-			flag1=1;
-		}
-		if((this.getRow()+1)<N)
-		{
-			board[this.getRow()+1][this.getCol()]-=1;
-			flag2=1;
-		}
-		if((this.getCol()+1)<N)
-		{
-			board[this.getRow()][this.getCol()+1]-=1;
-			flag3=1;
-		}
-		if(flag0==1 && flag1==1)
-			board[this.getRow()-1][this.getCol()-1]-=1;
-		if(flag2==1 && flag3==1)
-			board[this.getRow()+1][this.getCol()+1]-=1;
-		if(flag0==1 && flag3==1)
-			board[this.getRow()-1][this.getCol()+1]-=1;
-		if(flag1==1 && flag2==1)
-			board[this.getRow()+1][this.getCol()-1]-=1;
+		
 	}
 	
 	public void unmarkThreaten(int[][] board,int M,int N)
 	{
-		int flag0=0,flag1=0,flag2=0,flag3=0;	
-		if((this.getRow()-1)>=0)
+		
+		for(int i=0;i<M && i<=this.row+1;i++)
 		{
-			board[this.getRow()-1][this.getCol()]+=1;
-			flag0=1;
+			for(int j=0;j<N && j<=this.col+1;j++)
+			{
+				if (Math.abs(this.getRow() - i) == 1 && Math.abs(this.getCol() - j) == 1)
+					board[i][j]+=1;
+				if ((this.getRow() == i && Math.abs(this.getCol() - j) == 1)
+						|| (this.getCol() == j && Math.abs(this.getRow() - i) == 1))
+					board[i][j]+=1;
+			}
 		}
-		if((this.getCol()-1)>=0)
-		{
-			board[this.getRow()][this.getCol()-1]+=1;
-			flag1=1;
-		}
-		if((this.getRow()+1)<N)
-		{
-			board[this.getRow()+1][this.getCol()]+=1;
-			flag2=1;
-		}
-		if((this.getCol()+1)<N)
-		{
-			board[this.getRow()][this.getCol()+1]+=1;
-			flag3=1;
-		}
-		if(flag0==1 && flag1==1)
-			board[this.getRow()-1][this.getCol()-1]+=1;
-		if(flag2==1 && flag3==1)
-			board[this.getRow()+1][this.getCol()+1]+=1;
-		if(flag0==1 && flag3==1)
-			board[this.getRow()-1][this.getCol()+1]+=1;
-		if(flag1==1 && flag2==1)
-			board[this.getRow()+1][this.getCol()-1]+=1;
+		
 	}
 }
